@@ -1,0 +1,50 @@
+{
+  "name": "polling-app",
+  "version": "1.0.0",
+  "description": "A polling app built on the MERN stack",
+  "main": "webapp.js",
+  "scripts": {
+    "start": "node webapp.js",
+    "dev": "nodemon webapp.js",
+    "debug": "node --debug webapp.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjmax75/polling-app.git"
+  },
+  "keywords": [
+    "MERN",
+    "React",
+    "Node",
+    "Mongo",
+    "Express",
+    "Fullstack"
+  ],
+  "author": "Sean Behan <behanj@gmail.com> (http://boxitoff.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jjmax75/polling-app/issues"
+  },
+  "homepage": "https://github.com/jjmax75/polling-app#readme",
+  "engines": {
+    "node": "4.4.3"
+  },
+  "dependencies": {
+    "babel-preset-react": "6.5.0",
+    "express": "4.13.4",
+    "jquery": "2.2.3",
+    "react": "15.0.1",
+    "react-dom": "15.0.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "6.6.0",
+    "babelify": "7.2.0",
+    "browserify": "13.0.0",
+    "eslint": "2.8.0",
+    "eslint-plugin-react": "5.0.1",
+    "gulp": "3.9.1",
+    "vinyl-source-stream": "1.1.0",
+    "watchify": "3.7.0"
+  }
+}
