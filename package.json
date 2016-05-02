@@ -31,11 +31,20 @@
     "node": "4.4.3"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "1.15.0",
+    "connect-flash": "0.1.1",
+    "cookie-parser": "1.4.1",
     "dotenv": "2.0.0",
+    "ejs": "2.4.1",
     "express": "4.13.4",
+    "express-session": "1.13.0",
     "jquery": "2.2.3",
+    "method-override": "2.3.5",
+    "mongoose": "4.4.14",
+    "morgan": "1.7.0",
     "passport": "0.3.2",
-    "passport-twitter": "1.0.4",
+    "passport-local": "1.0.0",
     "react": "15.0.1",
     "react-bootstrap": "0.29.2",
     "react-dom": "15.0.1"

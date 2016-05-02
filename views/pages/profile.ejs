@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../partials/head %>
+</head>
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Profile page</h1>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="well">
+            <h3>Local account</h3>
+            <p>
+              <strong>id:</strong> <%= user._id %><br>
+              <strong>email:</strong> <%= user.local.email %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

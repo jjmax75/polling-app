@@ -2,45 +2,44 @@
 
 const express = require('express');
 const passport = require('passport');
-const twitterStrategy = require('passport-twitter');
-
+const mongoose = require('mongoose');
 const app = express();
-const path = process.cwd();
+
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
 require('dotenv').config();
 const port = process.env.PORT || 3000;
+const path = process.cwd();
 
-passport.use(new twitterStrategy({
-  consumerKey: process.env.TWITTER_CONSUMER_KEY,
-  consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: 'http://127.0.0.1:3000/auth/twitter/callback'
-}, function(token, tokenSecret, profile, cb) {
-  return cb(null, profile);
+mongoose.connect(process.env.MONGO_URI);
+
+require(path + '/config/passport')(passport);
+
+app.use('/css', express.static(path + '/static/css'));
+app.use('/js', express.static(path + '/static/js'));
+
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.set('view-engine', 'ejs');
+
+// setup passport
+app.use(session({
+  secret: 'thisishowwedoitttttt',
+  resave: false,
+  saveUninitialized: false
 }));
-
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
-
-app.use(express.static('static')); // will also set root to index.html
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
-app.get('/login', function(req, res) {
-  res.sendFile(path + '/static/login.html');
-});
-
-app.get('/login/twitter', passport.authenticate('twitter'));
-
-app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-  failureRedirect: '/login'
-}), function(req, res) {
-  res.redirect('/');
-});
+require(path + '/routes/index.js')(app, passport);
 
 app.listen(port, function() {
   console.log('Polling App listening on ' + port + '....');

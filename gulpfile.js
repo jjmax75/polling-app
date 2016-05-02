@@ -26,7 +26,7 @@ function scripts(watch) {
         this.emit('end');
       })
       .pipe(source('App.bundle.js'))
-      .pipe(gulp.dest('./static/'));
+      .pipe(gulp.dest('./static/js/'));
   };
 
   makeBundle();
