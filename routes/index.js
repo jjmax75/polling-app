@@ -70,6 +70,38 @@ module.exports = function(app, passport) {
     });
   });
 
+  // facebook routes
+  app.get('/login/facebook', passport.authenticate('facebook'));
+
+  app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
+  // twitter routes
+  app.get('/login/twitter', passport.authenticate('twitter'));
+
+  app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
+  // google routes
+  app.get('/login/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+
+  app.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
+  // github routes
+  app.get('/login/github', passport.authenticate('github', {scope: ['user:email']}));
+
+  app.get('/auth/github/callback', passport.authenticate('github', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
