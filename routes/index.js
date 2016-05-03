@@ -159,9 +159,6 @@ module.exports = function(app, passport) {
   app.get('/unlink/facebook', function(req, res) {
     let user = req.user;
     user.facebook.token = undefined;
-    user.facebook.name = undefined;
-    user.facebook.id = undefined;
-    user.facebook.email = undefined;
     user.save(function(err) {
       res.redirect('/profile');
     });
@@ -180,6 +177,15 @@ module.exports = function(app, passport) {
   app.get('/unlink/google', function(req, res) {
     let user = req.user;
     user.google.token = undefined;
+    user.save(function(err) {
+      res.redirect('/profile');
+    });
+  });
+
+  // unlink github
+  app.get('/unlink/github', function(req, res) {
+    let user = req.user;
+    user.github.token = undefined;
     user.save(function(err) {
       res.redirect('/profile');
     });
