@@ -102,6 +102,89 @@ module.exports = function(app, passport) {
     failureRedirect: '/login'
   }));
 
+  // authorise local login
+  app.get('/connect/local', function(req, res) {
+    res.render('pages/connect-local.ejs', {message: req.flash('loginMessage')});
+  });
+
+  app.post('/connect/local', passport.authenticate('local-signup', {
+    successRedirect: '/',
+    failureRedirect: '/connect/local',
+    failureFlash: true
+  }));
+
+  // authorise facebook
+  app.get('/connect/facebook', passport.authorize('facebook'));
+
+  app.get('/connect/facebook/callback', passport.authorize('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
+  // authorise twitter
+  app.get('/connect/twitter', passport.authorize('twitter'));
+
+  app.get('/connect/twitter/callback', passport.authorize('twitter', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
+  // authorise google
+  app.get('/connect/google', passport.authorize('google', {scope: ['profile', 'email']}));
+
+  app.get('/connect/google/callback', passport.authorize('google', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
+  // authorise github
+  app.get('/connect/github', passport.authorize('github', {scope: ['user:email']}));
+
+  app.get('/connect/github/callback', passport.authorize('github', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
+  // unlink local
+  app.get('/unlink/local', function(req, res) {
+    let user = req.user;
+    user.local.email = undefined;
+    user.local.password = undefined;
+    user.save(function(err) {
+      res.redirect('/profile');
+    });
+  });
+
+  // unlink facebook
+  app.get('/unlink/facebook', function(req, res) {
+    let user = req.user;
+    user.facebook.token = undefined;
+    user.facebook.name = undefined;
+    user.facebook.id = undefined;
+    user.facebook.email = undefined;
+    user.save(function(err) {
+      res.redirect('/profile');
+    });
+  });
+
+  // unlink twitter
+  app.get('/unlink/twitter', function(req, res) {
+    let user = req.user;
+    user.twitter.token = undefined;
+    user.save(function(err) {
+      res.redirect('/profile');
+    });
+  });
+
+  // unlink google
+  app.get('/unlink/google', function(req, res) {
+    let user = req.user;
+    user.google.token = undefined;
+    user.save(function(err) {
+      res.redirect('/profile');
+    });
+  });
+
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');

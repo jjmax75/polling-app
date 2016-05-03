@@ -15,50 +15,80 @@
         <div class="col-sm-6">
           <div class="well">
             <h3>Local account</h3>
-            <p>
-              <strong>id:</strong> <%= user._id %><br>
-              <strong>email:</strong> <%= user.local.email %>
-            </p>
+            <% if (user.local.email) { %>
+              <p>
+                <strong>id:</strong> <%= user._id %><br>
+                <strong>email:</strong> <%= user.local.email %>
+              </p>
+
+              <a href="/unlink/local" class="btn btn-default">Unlink</a>
+            <% } else { %>
+              <a href="/connect/local" class="btn btn-default">Connect Local</a>
+            <% } %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="well">
             <h3>Facebook account</h3>
-            <p>
-              <strong>id:</strong> <%= user.facebook.id %><br>
-              <strong>email:</strong> <%= user.facebook.email %><br>
-              <strong>name:</strong> <%= user.facebook.name %>
-            </p>
+            <% if (user.facebook.id) { %>
+              <p>
+                <strong>id:</strong> <%= user.facebook.id %><br>
+                <strong>email:</strong> <%= user.facebook.email %><br>
+                <strong>name:</strong> <%= user.facebook.name %>
+              </p>
+
+              <a href="/unlink/facebook" class="btn btn-default">Unlink</a>
+            <% } else { %>
+              <a href="/connect/facebook" class="btn btn-default">Connect Facebook</a>
+            <% } %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="well">
             <h3>Twitter account</h3>
-            <p>
-              <strong>id:</strong> <%= user.twitter.id %><br>
-              <strong>username:</strong> <%= user.twitter.username %><br>
-              <strong>displayName:</strong> <%= user.twitter.displayName %>
-            </p>
+            <% if (user.twitter.id) { %>
+              <p>
+                <strong>id:</strong> <%= user.twitter.id %><br>
+                <strong>username:</strong> <%= user.twitter.username %><br>
+                <strong>displayName:</strong> <%= user.twitter.displayName %>
+              </p>
+
+              <a href="/unlink/twitter" class="btn btn-default">Unlink</a>
+            <% } else { %>
+              <a href="/connect/twitter" class="btn btn-default">Connect Twitter</a>
+            <% } %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="well">
             <h3>Google account</h3>
-            <p>
-              <strong>id:</strong> <%= user.google.id %><br>
-              <strong>username:</strong> <%= user.google.email %><br>
-              <strong>name:</strong> <%= user.google.name %>
-            </p>
+            <% if (user.google.id) { %>
+              <p>
+                <strong>id:</strong> <%= user.google.id %><br>
+                <strong>username:</strong> <%= user.google.email %><br>
+                <strong>name:</strong> <%= user.google.name %>
+              </p>
+
+              <a href="/unlink/google" class="btn btn-default">Unlink</a>
+            <% } else { %>
+              <a href="/connect/google" class="btn btn-default">Connect Google</a>
+            <% } %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="well">
             <h3>GitHub account</h3>
-            <p>
-              <strong>id:</strong> <%= user.github.id %><br>
-              <strong>username:</strong> <%= user.github.username %><br>
-              <strong>name:</strong> <%= user.github.name %>
-            </p>
+            <% if (user.github.id) { %>
+              <p>
+                <strong>id:</strong> <%= user.github.id %><br>
+                <strong>username:</strong> <%= user.github.username %><br>
+                <strong>name:</strong> <%= user.github.name %>
+              </p>
+
+              <a href="/unlink/github" class="btn btn-default">Unlink</a>
+            <% } else { %>
+              <a href="/connect/github" class="btn btn-default">Connect GitHub</a>
+            <% } %>
           </div>
         </div>
       </div>
