@@ -10,6 +10,13 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const redis = require('redis');
+const RedisStore = require('connect-redis')(session);
+
+const RedisClient = redis.createClient();
+RedisClient.on('error', function(err) {
+  console.log('Redis error: ' + err);
+});
 
 require('dotenv').config();
 const port = process.env.PORT || 3000;
@@ -31,8 +38,11 @@ app.set('view-engine', 'ejs');
 
 // setup passport
 app.use(session({
+  store: new RedisStore({
+    client: RedisClient
+  }),
   secret: 'thisishowwedoitttttt',
-  resave: false,
+  resave: true,
   saveUninitialized: false
 }));
 app.use(passport.initialize());
