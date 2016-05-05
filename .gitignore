@@ -2,3 +2,4 @@ node_modules
 static/js/App.bundle*
 *.log
 .env
+*.rdb

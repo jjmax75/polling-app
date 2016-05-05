@@ -1,12 +1,12 @@
 'use strict';
 
-const express = require('express');
-const passport = require('passport');
-const mongoose = require('mongoose');
+const express = require('express'); // web framework
+const passport = require('passport'); // middleware for authentication
+const mongoose = require('mongoose'); // mongo driver
 const app = express();
 
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
+const morgan = require('morgan'); // http logger
+// const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -30,7 +30,7 @@ app.use('/css', express.static(path + '/static/css'));
 app.use('/js', express.static(path + '/static/js'));
 
 app.use(morgan('dev'));
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
