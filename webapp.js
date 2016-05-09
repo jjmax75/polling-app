@@ -6,11 +6,10 @@ const mongoose = require('mongoose'); // mongo driver
 const app = express();
 
 const morgan = require('morgan'); // http logger
-// const cookieParser = require('cookie-parser');
-const flash = require('connect-flash');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const redis = require('redis');
+const flash = require('connect-flash'); // flash messages
+const bodyParser = require('body-parser'); // populates req.body with post params
+const session = require('express-session'); // session middleware
+const redis = require('redis'); // cookie store
 const RedisStore = require('connect-redis')(session);
 
 const RedisClient = redis.createClient();
@@ -30,7 +29,6 @@ app.use('/css', express.static(path + '/static/css'));
 app.use('/js', express.static(path + '/static/js'));
 
 app.use(morgan('dev'));
-// app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 

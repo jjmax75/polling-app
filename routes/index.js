@@ -12,7 +12,7 @@ const isLoggedIn = function(req, res, next) {
 
 const isLoggedOut = function(req, res, next) {
   if (req.isAuthenticated()) {
-    res.redirect('/');
+    res.redirect('/polls');
   } else {
     return next();
   }
@@ -23,12 +23,16 @@ module.exports = function(app, passport) {
     return req.isAuthenticated();
   }
 
-  app.get('/', isLoggedIn, function(req, res) {
+  app.get('/polls*', isLoggedIn, function(req, res) {
     let status = true;
     res.render('pages/index.ejs', {
       status: status,
       title: 'Keep on pollin\''
     });
+  });
+
+  app.get('/', isLoggedIn, function(req, res) {
+    res.redirect('/polls');
   });
 
   app.get('/login', function(req, res) {
