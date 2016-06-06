@@ -2,28 +2,11 @@
 
 const path = process.cwd();
 
-const isLoggedIn = function(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    res.redirect('/login');
-  }
-}
-
-const isLoggedOut = function(req, res, next) {
-  if (req.isAuthenticated()) {
-    res.redirect('/polls');
-  } else {
-    return next();
-  }
-}
+const authentication = require(path + '/routes/authentication')();
 
 module.exports = function(app, passport) {
-  function getLoginStatus(req) {
-    return req.isAuthenticated();
-  }
 
-  app.get('/polls*', isLoggedIn, function(req, res) {
+  app.get('/polls*', authentication.isLoggedIn, function(req, res) {
     let status = true;
     res.render('pages/index.ejs', {
       status: status,
@@ -31,12 +14,12 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/', isLoggedIn, function(req, res) {
+  app.get('/', authentication.isLoggedIn, function(req, res) {
     res.redirect('/polls');
   });
 
   app.get('/login', function(req, res) {
-    let status = getLoginStatus(req);
+    let status = req.isAuthenticated();
     res.render('pages/login.ejs', {
       message: req.flash('loginMessage'),
       status: status,
@@ -44,28 +27,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-  }));
-
-  app.get('/signup',isLoggedOut, function(req, res) {
-    let status = false;
-    res.render('pages/signup.ejs', {
-      message: req.flash('signupMessage'),
-      status: status,
-      title: 'Signup'
-    });
-  });
-
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile',
-    failureRedirect: '/signup',
-    failureFlash: true
-  }));
-
-  app.get('/profile', isLoggedIn, function(req, res) {
+  app.get('/profile', authentication.isLoggedIn, function(req, res) {
     let status = true;
     res.render('pages/profile.ejs', {
       user: req.user,

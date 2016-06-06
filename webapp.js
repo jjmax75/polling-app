@@ -27,6 +27,7 @@ require(path + '/config/passport')(passport);
 
 app.use('/css', express.static(path + '/static/css'));
 app.use('/js', express.static(path + '/static/js'));
+app.use('/fonts', express.static(path + '/static/fonts'));
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());

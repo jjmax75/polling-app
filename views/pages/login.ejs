@@ -10,23 +10,10 @@
 
     <main>
       <div class="container">
-        <h1>Login Page</h1>
         <% if (message.length > 0) { %>
           <div class="alert alert-danger"><%= message %></div>
         <% } %>
         <div class="form-signin">
-          <form action="/login" method="post">
-            <h2 class="form-signin-heading">Account sign in</h2>
-            <label for="email" class="sr-only">Email address</label>
-            <input type="email" id="email-input" name="email" class="form-control" placeholder="Email address" required autofocus>
-            <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password-input" name="password" class="form-control" placeholder="Password" required>
-            <div class="checkbox">
-              <label><input type="checkbox" value="remember-me"> Remember me</label>
-            </div>
-            <button class="btn btn-lg btn-primary login" type="submit">Sign in</button>
-            <a class="btn btn-lg btn-default register pull-right" href="/signup">Register</a>
-          </form>
           <a class="btn btn-block btn-lg btn-social btn-twitter" href="/login/twitter">
             <span class="fa fa-twitter"></span>
             Sign in with Twitter
