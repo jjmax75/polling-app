@@ -2,11 +2,12 @@
 
 const path = process.cwd();
 
-const authentication = require(path + '/routes/authentication')();
+const auth = require(path + '/routes/authentication')();
 
 module.exports = function(app, passport) {
 
-  app.get('/polls*', authentication.isLoggedIn, function(req, res) {
+  // React router
+  app.get('/polls*', auth.isLoggedIn, function(req, res) {
     let status = true;
     res.render('pages/index.ejs', {
       status: status,
@@ -14,20 +15,12 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/', authentication.isLoggedIn, function(req, res) {
+  app.get('/', auth.isLoggedIn, function(req, res) {
     res.redirect('/polls');
   });
 
-  app.get('/login', function(req, res) {
-    let status = req.isAuthenticated();
-    res.render('pages/login.ejs', {
-      message: req.flash('loginMessage'),
-      status: status,
-      title: 'Login'
-    });
-  });
-
-  app.get('/profile', authentication.isLoggedIn, function(req, res) {
+  // TODO - Change this to React
+  app.get('/profile', auth.isLoggedIn, function(req, res) {
     let status = true;
     res.render('pages/profile.ejs', {
       user: req.user,
@@ -36,129 +29,37 @@ module.exports = function(app, passport) {
     });
   });
 
-  // facebook routes
+  app.get('/login', auth.login);
+  app.get('/logout', auth.logout);
+
+  // login
   app.get('/login/facebook', passport.authenticate('facebook'));
-
-  app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
-
-  // twitter routes
   app.get('/login/twitter', passport.authenticate('twitter'));
-
-  app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
-
-  // google routes
   app.get('/login/google', passport.authenticate('google', {scope: ['profile', 'email']}));
-
-  app.get('/auth/google/callback', passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
-
-  // github routes
   app.get('/login/github', passport.authenticate('github', {scope: ['user:email']}));
 
-  app.get('/auth/github/callback', passport.authenticate('github', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
+  // login callbacks
+  app.get('/auth/facebook/callback', auth.facebookLogin);
+  app.get('/auth/twitter/callback', auth.twitterLogin);
+  app.get('/auth/google/callback', auth.googleLogin);
+  app.get('/auth/github/callback', auth.githubLogin);
 
-  // authorise local login
-  app.get('/connect/local', function(req, res) {
-    res.render('pages/connect-local.ejs', {message: req.flash('loginMessage')});
-  });
-
-  app.post('/connect/local', passport.authenticate('local-signup', {
-    successRedirect: '/',
-    failureRedirect: '/connect/local',
-    failureFlash: true
-  }));
-
-  // authorise facebook
+  // authorise
   app.get('/connect/facebook', passport.authorize('facebook'));
-
-  app.get('/connect/facebook/callback', passport.authorize('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
-
-  // authorise twitter
   app.get('/connect/twitter', passport.authorize('twitter'));
-
-  app.get('/connect/twitter/callback', passport.authorize('twitter', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
-
-  // authorise google
   app.get('/connect/google', passport.authorize('google', {scope: ['profile', 'email']}));
-
-  app.get('/connect/google/callback', passport.authorize('google', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
-
-  // authorise github
   app.get('/connect/github', passport.authorize('github', {scope: ['user:email']}));
 
-  app.get('/connect/github/callback', passport.authorize('github', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
+  // authorise callbacks
+  app.get('/connect/facebook/callback', auth.facebookAuthorise);
+  app.get('/connect/twitter/callback', auth.twitterAuthorise);
+  app.get('/connect/google/callback', auth.googleAuthorise);
+  app.get('/connect/github/callback', auth.githubAuthorise);
 
-  // unlink local
-  app.get('/unlink/local', function(req, res) {
-    let user = req.user;
-    user.local.email = undefined;
-    user.local.password = undefined;
-    user.save(function(err) {
-      res.redirect('/profile');
-    });
-  });
+  // unlinking
+  app.get('/unlink/facebook', auth.unlinkFacebook);
+  app.get('/unlink/twitter', auth.unlinkTwitter);
+  app.get('/unlink/google', auth.unlinkGoogle);
+  app.get('/unlink/github', auth.unlinkGithub);
 
-  // unlink facebook
-  app.get('/unlink/facebook', function(req, res) {
-    let user = req.user;
-    user.facebook = undefined;
-    user.save(function(err) {
-      res.redirect('/profile');
-    });
-  });
-
-  // unlink twitter
-  app.get('/unlink/twitter', function(req, res) {
-    let user = req.user;
-    user.twitter = undefined;
-    user.save(function(err) {
-      res.redirect('/profile');
-    });
-  });
-
-  // unlink google
-  app.get('/unlink/google', function(req, res) {
-    let user = req.user;
-    user.google = undefined;
-    user.save(function(err) {
-      res.redirect('/profile');
-    });
-  });
-
-  // unlink github
-  app.get('/unlink/github', function(req, res) {
-    let user = req.user;
-    user.github = undefined;
-    user.save(function(err) {
-      res.redirect('/profile');
-    });
-  });
-
-  app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  });
 }

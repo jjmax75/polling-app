@@ -14,21 +14,6 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="well">
-            <h3>Local account</h3>
-            <% if (user.local.email) { %>
-              <p>
-                <strong>id:</strong> <%= user._id %><br>
-                <strong>email:</strong> <%= user.local.email %>
-              </p>
-
-              <a href="/unlink/local" class="btn btn-default">Unlink</a>
-            <% } else { %>
-              <a href="/connect/local" class="btn btn-default">Connect Local</a>
-            <% } %>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="well">
             <h3>Facebook account</h3>
             <% if (user.facebook.token) { %>
               <p>
