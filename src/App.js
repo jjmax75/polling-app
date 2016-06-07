@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, Redirect, browserHistory} from 'react-router';
 
-const PollListScreen = require('./PollListScreen.js');
-const PollAdd = require('./PollAdd.js');
+const PollListScreen = require('./PollListScreen');
+const PollAdd = require('./PollAdd');
 
 // building componenets without using javascript classes
 // using https://gist.github.com/jquense/47bbd2613e0b03d7e51c
