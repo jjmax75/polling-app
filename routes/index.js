@@ -43,10 +43,10 @@ module.exports = function(app, passport) {
   app.get('/connect/github/callback', auth.githubAuthorise);
 
   // unlinking
-  app.get('/unlink/facebook', auth.unlinkFacebook);
-  app.get('/unlink/twitter', auth.unlinkTwitter);
-  app.get('/unlink/google', auth.unlinkGoogle);
-  app.get('/unlink/github', auth.unlinkGithub);
+  app.get('/auth/unlink/facebook', auth.unlinkFacebook);
+  app.get('/auth/unlink/twitter', auth.unlinkTwitter);
+  app.get('/auth/unlink/google', auth.unlinkGoogle);
+  app.get('/auth/unlink/github', auth.unlinkGithub);
 
   // React router
   app.get('/*', function(req, res) {
@@ -56,5 +56,4 @@ module.exports = function(app, passport) {
       title: 'Keep on pollin\''
     });
   });
-
 }

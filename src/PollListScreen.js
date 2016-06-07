@@ -14,7 +14,7 @@ let polls = [
 
 function PollListScreen(props, context) {
   var instance = Object.create(React.Component.prototype);
-
+  console.log(props);
   instance.props = props;
   instance.context = context;
 

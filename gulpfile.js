@@ -16,9 +16,12 @@ function scripts(watch) {
 
   bundler.transform('babelify', {presets: ['react', 'es2015']});
 
-  bundler.on('log', function(msg) {console.log('Updated: ' + msg)});
+  bundler.on('log', function(msg) {
+    console.log('Updated: ' + msg);
+  });
 
   function makeBundle() {
+    console.log('bundling the bundle');
     bundler.bundle()
       .on('error', function(err) {
         console.error(err.message);
