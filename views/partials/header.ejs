@@ -18,6 +18,8 @@
         <li><a href="/polls">Polls</a></li>
         <%if (status) { %>
           <li><a href="/logout">Logout</a></li>
+        <% } else { %>
+          <li><a href="/login">Login</a></li>
         <% } %>
       </ul>
     </div><!-- /.navbar-collapse -->

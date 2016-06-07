@@ -5,9 +5,14 @@ const path = process.cwd();
 const auth = require(path + '/routes/authentication')();
 
 module.exports = function(app, passport) {
-  
-  app.get('/', auth.isLoggedIn, function(req, res) {
+
+  app.get('/', function(req, res) {
     res.redirect('/polls');
+  });
+
+  // user api calls
+  app.get('/api/user/info', function(req, res) {
+    res.json(req.user);
   });
 
   app.get('/login', auth.login);
@@ -44,8 +49,8 @@ module.exports = function(app, passport) {
   app.get('/unlink/github', auth.unlinkGithub);
 
   // React router
-  app.get('/*', auth.isLoggedIn, function(req, res) {
-    let status = true;
+  app.get('/*', function(req, res) {
+    let status = req.isAuthenticated();
     res.render('pages/index.ejs', {
       status: status,
       title: 'Keep on pollin\''

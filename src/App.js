@@ -5,6 +5,15 @@ import {Router, Route, Redirect, browserHistory} from 'react-router';
 const PollListScreen = require('./PollListScreen');
 const PollAdd = require('./PollAdd');
 
+const getUserInfo = new XMLHttpRequest();
+getUserInfo.open('GET', '/api/user/info', true);
+getUserInfo.onreadystatechange = function () {
+  if (getUserInfo.readyState != 4 || getUserInfo.status != 200) return;
+  console.log(getUserInfo.responseText);
+
+};
+getUserInfo.send();
+
 // building componenets without using javascript classes
 // using https://gist.github.com/jquense/47bbd2613e0b03d7e51c
 // see eric elliott and mattias p johansson
