@@ -19,14 +19,3 @@ ReactDOM.render(
   </Router>
   ), document.getElementById('app')
 );
-
-// ReactDOM.render(
-//   (
-//     <Router history={hashHistory}>
-//       <Route path='/bugs' component={BugList} />
-//       <Route path='/bugs/:id' component={BugEdit} />
-//       <Redirect from='/' to='/bugs' />
-//       <Route path='*' component={Error404} />
-//     </Router>
-//   ), document.getElementById('main')
-// );

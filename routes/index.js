@@ -5,28 +5,9 @@ const path = process.cwd();
 const auth = require(path + '/routes/authentication')();
 
 module.exports = function(app, passport) {
-
-  // React router
-  app.get('/polls*', auth.isLoggedIn, function(req, res) {
-    let status = true;
-    res.render('pages/index.ejs', {
-      status: status,
-      title: 'Keep on pollin\''
-    });
-  });
-
+  
   app.get('/', auth.isLoggedIn, function(req, res) {
     res.redirect('/polls');
-  });
-
-  // TODO - Change this to React
-  app.get('/profile', auth.isLoggedIn, function(req, res) {
-    let status = true;
-    res.render('pages/profile.ejs', {
-      user: req.user,
-      status: status,
-      title: 'Profile'
-    });
   });
 
   app.get('/login', auth.login);
@@ -61,5 +42,14 @@ module.exports = function(app, passport) {
   app.get('/unlink/twitter', auth.unlinkTwitter);
   app.get('/unlink/google', auth.unlinkGoogle);
   app.get('/unlink/github', auth.unlinkGithub);
+
+  // React router
+  app.get('/*', auth.isLoggedIn, function(req, res) {
+    let status = true;
+    res.render('pages/index.ejs', {
+      status: status,
+      title: 'Keep on pollin\''
+    });
+  });
 
 }
