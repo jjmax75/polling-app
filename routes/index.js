@@ -5,7 +5,7 @@ const path = process.cwd();
 const auth = require(path + '/routes/authentication')();
 
 module.exports = function(app, passport) {
-
+  
   app.get('/', function(req, res) {
     res.redirect('/polls');
   });
@@ -48,7 +48,7 @@ module.exports = function(app, passport) {
   app.get('/auth/unlink/google', auth.unlinkGoogle);
   app.get('/auth/unlink/github', auth.unlinkGithub);
 
-  // React router
+  // React routes
   app.get('/*', function(req, res) {
     let status = req.isAuthenticated();
     res.render('pages/index.ejs', {

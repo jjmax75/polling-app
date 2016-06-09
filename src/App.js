@@ -1,15 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Router, Route, Redirect, browserHistory} from 'react-router';
 
-const PollListScreen = require('./PollListScreen');
-const PollAdd = require('./PollAdd');
+import Navigation from './Navigation.js';
 
-ReactDOM.render(
-  (
-  <Router history={browserHistory}>
-    <Route path='/polls' component={PollListScreen} />
-    <Route path='/polls/new' component={PollAdd} />
-  </Router>
-  ), document.getElementById('app')
-);
+function App(props, context) {
+  var instance = Object.create(React.Component.prototype);
+  instance.props = props;
+  instance.context = context;
+
+  instance.render = () => {
+    return (
+      <div className="poll-app">
+        <Navigation />
+        {instance.props.children}
+      </div>
+    );
+  };
+
+  return instance;
+}
+
+module.exports = App;

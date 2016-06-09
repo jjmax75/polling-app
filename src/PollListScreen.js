@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PollDescription from './PollDescription.js';
-import PollList from './PollList.js';
+import PollDescription from './PollDescription';
+import PollList from './PollList';
 
 // const getUserInfo = new XMLHttpRequest();
 // getUserInfo.open('GET', '/api/user/info', true);
