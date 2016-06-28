@@ -40,7 +40,7 @@ app.use(session({
   store: new RedisStore({
     client: RedisClient
   }),
-  secret: 'thisishowwedoitttttt',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: false
 }));

@@ -14,5 +14,5 @@ ReactDOM.render(
       <Route path='/polls/new' component={PollAdd} />
     </Route>
   </Router>
-  ), document.getElementById('app')
+), document.getElementById('root')
 );

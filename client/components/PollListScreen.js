@@ -13,7 +13,7 @@ import PollList from './PollList';
 
 // temp data object for building before db is hooked up
 let polls = [
-  {id: 1, title: 'Who should be president?'},
+  {id: 1, title: 'Who should be pres?'},
   {id: 2, title: 'What\'s your favourite colour?'},
   {id: 3, title: 'does React make your head want to explode?'},
   {id: 4, title: 'In the land of the blind the one eyed man is king'},

@@ -5,7 +5,7 @@ const path = process.cwd();
 const auth = require(path + '/routes/authentication')();
 
 module.exports = function(app, passport) {
-  
+
   app.get('/', function(req, res) {
     res.redirect('/polls');
   });
@@ -50,10 +50,6 @@ module.exports = function(app, passport) {
 
   // React routes
   app.get('/*', function(req, res) {
-    let status = req.isAuthenticated();
-    res.render('pages/index.ejs', {
-      status: status,
-      title: 'Keep on pollin\''
-    });
+    res.sendFile(path + '/static/index.html');
   });
 }
