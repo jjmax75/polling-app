@@ -9,7 +9,7 @@ import PollAdd from './PollAdd';
 ReactDOM.render(
   (
   <Router history={browserHistory}>
-    <Route path='/polls' component={App}>
+    <Route path='/' component={App}>
       <IndexRoute component={PollListScreen} />
       <Route path='/polls/new' component={PollAdd} />
     </Route>

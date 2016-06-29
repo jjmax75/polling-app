@@ -3,32 +3,36 @@ import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 function Navigation(props, context) {
-  var instance = Object.create(React.Component.prototype);
+  let instance = Object.create(React.Component.prototype);
   instance.props = props;
   instance.context = context;
+
+  const showLock = function showLock() {
+    instance.props.lock.show();
+  };
+
+  const logout = function logout() {
+    localStorage.removeItem('id_token');
+  };
 
   instance.render = () => {
     return (
       <Navbar fluid>
         <Navbar.Header>
           <Navbar.Brand>
-            <IndexLinkContainer to='/polls'>
-              <span>Box It Off Polling App</span>
+            <IndexLinkContainer to='/'>
+              <a href="">Box It Off Polling App</a>
             </IndexLinkContainer>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <IndexLinkContainer to='/polls' activeClassName='active'>
-              <NavItem>Polls</NavItem>
+            <IndexLinkContainer to='/' activeClassName='active'>
+              <NavItem>Home</NavItem>
             </IndexLinkContainer>
-            <LinkContainer to='/logout' activeClassName='active'>
-              <NavItem>Logout</NavItem>
-            </LinkContainer>
-            <LinkContainer to='/login' activeClassname='active'>
-              <NavItem>Login</NavItem>
-            </LinkContainer>
+            <NavItem onClick={logout}>Logout</NavItem>
+            <NavItem onClick={showLock}>Login</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

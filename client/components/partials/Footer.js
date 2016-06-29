@@ -7,8 +7,10 @@ function Footer(props, context) {
 
   instance.render = () => {
     return (
-      <footer>
-        &copy; Copyright 2016 - Se&aacute;n Behan, <a href="http://www.boxitoff.com">Box It Off</a>
+      <footer className="footer">
+        <div className="container">
+          <p className="text-muted">&copy; Copyright 2016 - Sean Behan, <a href="http://www.boxitoff.com">Box It Off</a></p>
+        </div>
       </footer>
     );
   };

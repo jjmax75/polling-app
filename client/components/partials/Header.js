@@ -9,7 +9,8 @@ function Header(props, context) {
   instance.render = () => {
     return (
       <header>
-        <Navigation />
+        {instance.props.idToken ? <span>{instance.props.idToken}</span> : null}
+        <Navigation lock={instance.props.lock} />
       </header>
     );
   };
