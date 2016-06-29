@@ -18,4 +18,4 @@ function PollDescription(props, context) {
   return instance;
 }
 
-module.exports = PollDescription;
+export default PollDescription;

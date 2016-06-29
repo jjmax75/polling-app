@@ -27,4 +27,4 @@ function PollList(props, context) {
   return instance;
 }
 
-module.exports = PollList;
+export default PollList;

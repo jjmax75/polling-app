@@ -4,7 +4,7 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 
 function scripts(watch) {
-  var bundler = browserify('./client/components/Routes.js', {});
+  var bundler = browserify('./client/routes.js', {});
 
   if (watch) {
     bundler.cache = {};

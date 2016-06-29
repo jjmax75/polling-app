@@ -59,4 +59,4 @@ function PollAdd(props, context) {
   return instance;
 }
 
-module.exports = PollAdd;
+export default PollAdd;

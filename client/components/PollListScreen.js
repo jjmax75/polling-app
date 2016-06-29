@@ -37,4 +37,4 @@ function PollListScreen(props, context) {
   return instance;
 }
 
-module.exports = PollListScreen;
+export default PollListScreen;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PollNode(props, context) {
+function PollSingle(props, context) {
   var instance = Object.create(React.Component.prototype);
 
   instance.props = props;
@@ -8,11 +8,11 @@ function PollNode(props, context) {
 
   instance.render = () => {
     return (
-      <li>{instance.props.title}</li>
+      <h1>This is a single Poll</h1>
     );
   };
 
   return instance;
 }
 
-export default PollNode;
+export default PollSingle;

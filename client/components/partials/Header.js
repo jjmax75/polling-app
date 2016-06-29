@@ -18,4 +18,4 @@ function Header(props, context) {
   return instance;
 }
 
-module.exports = Header;
+export default Header;

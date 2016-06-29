@@ -18,4 +18,4 @@ function Footer(props, context) {
   return instance;
 }
 
-module.exports = Footer;
+export default Footer;

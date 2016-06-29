@@ -42,4 +42,4 @@ function Navigation(props, context) {
   return instance;
 }
 
-module.exports = Navigation;
+export default Navigation;

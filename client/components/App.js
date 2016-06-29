@@ -48,4 +48,4 @@ function App(props, context) {
   return instance;
 }
 
-module.exports = App;
+export default App;
