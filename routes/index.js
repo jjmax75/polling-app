@@ -2,7 +2,7 @@
 
 const path = process.cwd();
 
-const auth = require(path + '/routes/authentication')();
+const Polls = require(path + '/models/polls');
 
 module.exports = function(app) {
 
@@ -11,13 +11,12 @@ module.exports = function(app) {
     res.json(req.user);
   });
 
-  app.get('/logout', auth.logout);
-
-  // unlinking
-  app.get('/auth/unlink/facebook', auth.unlinkFacebook);
-  app.get('/auth/unlink/twitter', auth.unlinkTwitter);
-  app.get('/auth/unlink/google', auth.unlinkGoogle);
-  app.get('/auth/unlink/github', auth.unlinkGithub);
+  app.get('/api/get/polls', function(req, res) {
+    Polls.find(function(err, polls) {
+      if (err) return console.error(err);
+      res.json(polls);
+    });
+  });
 
   // React routes
   app.get('/*', function(req, res) {
